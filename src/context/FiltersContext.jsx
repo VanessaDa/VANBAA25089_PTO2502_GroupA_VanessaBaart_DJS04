@@ -1,5 +1,9 @@
 import { createContext, useContext, useMemo, useReducer } from "react";
 
+/**
+ * FiltersContext provides filter state and updater functions for the app.
+ * @type {React.Context}
+ */
 const FiltersContext = createContext(null);
 
 const initialState = {

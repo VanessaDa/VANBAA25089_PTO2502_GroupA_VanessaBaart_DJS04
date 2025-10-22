@@ -1,3 +1,7 @@
+/**
+ * Utility functions for sorting podcast data.
+ * @module sorters
+ */
 export const sortByNewest = (data) =>
   [...data].sort((a, b) => new Date(b.updated) - new Date(a.updated));
 export const sortByTitle = (data, direction = "asc") =>

@@ -1,5 +1,11 @@
 import { useFilters } from "../context/FiltersContext";
 import { genres } from "../data/genres";
+
+/**
+ * GenreFilter component for selecting podcast genres.
+ * @param {{ genres: string[], selectedGenre: string, onGenreChange: function }} props - Component props
+ * @returns {JSX.Element}
+ */
 export default function GenreFilter() {
   const { state, dispatch } = useFilters();
   return (
@@ -7,7 +13,9 @@ export default function GenreFilter() {
       <span>Genre</span>
       <select
         value={state.genre}
-        onChange={(e) => dispatch({ type: "SET_GENRE", payload: e.target.value })}
+        onChange={(e) =>
+          dispatch({ type: "SET_GENRE", payload: e.target.value })
+        }
         aria-label="Filter by genre"
       >
         <option value="all">All</option>
