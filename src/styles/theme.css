@@ -1,0 +1,12 @@
+:root {
+  --bg: #ffffff;
+  --panel: #f7f7f9;
+  --text: #1b1b1d;
+  --muted: #666666;
+  --accent: #0055ff;
+  --border: #e2e2e8;
+}
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}

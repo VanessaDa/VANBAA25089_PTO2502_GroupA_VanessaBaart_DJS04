@@ -1,0 +1,53 @@
+@import './theme.css';
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body { margin: 0; font-family: system-ui, Segoe UI, Roboto, Ubuntu, sans-serif; }
+
+.container { max-width: 1100px; margin-inline: auto; padding: 24px; }
+header { display: flex; align-items: baseline; gap: 12px; justify-content: space-between; }
+
+.muted { color: var(--muted); }
+.small { font-size: 0.9rem; }
+
+.toolbar { display: grid; grid-template-columns: 1fr 200px 200px; gap: 12px; margin: 16px 0; }
+.control { display: flex; flex-direction: column; gap: 6px; }
+
+input, select, button {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+button.active, [aria-current="page"] { outline: 2px solid var(--accent); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+.card:hover { transform: translateY(-4px); }
+
+.card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
+.card-body { padding: 12px; }
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+@media (max-width: 720px) {
+  .toolbar { grid-template-columns: 1fr; }
+}
