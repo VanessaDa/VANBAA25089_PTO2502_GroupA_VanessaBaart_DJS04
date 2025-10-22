@@ -2,7 +2,13 @@ import { createContext, useContext, useMemo, useReducer } from "react";
 
 /**
  * FiltersContext provides filter state and updater functions for the app.
- * @type {React.Context}
+ * @type {React.Context<{state: {
+ *   q: string,
+ *   sort: 'newest' | 'title-asc' | 'title-desc',
+ *   genre: string,
+ *   page: number,
+ *   perPage: number,
+ * }, dispatch: React.Dispatch<any>}>}
  */
 const FiltersContext = createContext(null);
 
@@ -17,15 +23,43 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "SET_QUERY":
-      return { ...state, q: action.payload, page: 1 };
+      // ❌ was: return { ...state, q: action.payload, page: 1 };
+      return { ...state, q: action.payload };
+
     case "SET_SORT":
-      return { ...state, sort: action.payload, page: 1 };
+      // ❌ was: return { ...state, sort: action.payload, page: 1 };
+      return { ...state, sort: action.payload };
+
     case "SET_GENRE":
-      return { ...state, genre: action.payload, page: 1 };
+      // ❌ was: return { ...state, genre: action.payload, page: 1 };
+      return { ...state, genre: action.payload };
+
     case "SET_PAGE":
       return { ...state, page: action.payload };
-    case "HYDRATE":
-      return { ...state, ...action.payload };
+
+    case "SET_PER_PAGE":
+      return { ...state, perPage: action.payload };
+
+    case "HYDRATE": {
+      // Optional: accept only known keys & coerce types (helps URL-sync)
+      const patch = action.payload ?? {};
+      const next = { ...state };
+
+      if (typeof patch.q === "string") next.q = patch.q;
+      if (typeof patch.sort === "string") next.sort = patch.sort;
+      if (typeof patch.genre === "string") next.genre = patch.genre;
+
+      if (patch.page != null) {
+        const n = Number(patch.page);
+        if (!Number.isNaN(n)) next.page = n;
+      }
+      if (patch.perPage != null) {
+        const n = Number(patch.perPage);
+        if (!Number.isNaN(n)) next.perPage = n;
+      }
+      return next;
+    }
+
     default:
       return state;
   }
