@@ -67,7 +67,9 @@ function Shell() {
     <div className="container">
       <header>
         <h1>🎧 React Podcast Browser</h1>
-        <p className="muted small">{total} {total === 1 ? "show" : "shows"}</p>
+        <p className="muted small">
+          {total} {total === 1 ? "show" : "shows"}
+        </p>
       </header>
       <div className="toolbar">
         <SearchBar />
